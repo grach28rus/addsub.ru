@@ -22,7 +22,7 @@ class AppAsset extends AssetBundle
         'js/main/jquery.slimscroll.js',
         'js/main/inspinia.js',
         'js/main/pace.min.js',
-        'js/bootstrap-formhelpers-phone.js',
+        'js/chartJs/Chart.min.js',
         'js/index.js',
     ];
     public $depends = [

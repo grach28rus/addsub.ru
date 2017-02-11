@@ -373,7 +373,7 @@ body.canvas-menu.mini-navbar .footer {
 body.fixed-sidebar .navbar-static-side,
 body.canvas-menu .navbar-static-side {
   position: fixed;
-  width: 220px;
+  width: 150px;
   z-index: 2001;
   height: 100%;
 }
@@ -384,10 +384,10 @@ body.fixed-sidebar.mini-navbar #page-wrapper {
   margin: 0 0 0 0px;
 }
 body.body-small.fixed-sidebar.mini-navbar #page-wrapper {
-  margin: 0 0 0 220px;
+  margin: 0 0 0 150px;
 }
 body.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
-  width: 220px;
+  width: 150px;
 }
 .fixed-sidebar.mini-navbar .nav li:focus > .nav-second-level,
 .canvas-menu.mini-navbar .nav li:focus > .nav-second-level {
@@ -446,7 +446,7 @@ body.canvas-menu nav.navbar-static-side {
 }
 body.canvas-menu.mini-navbar nav.navbar-static-side {
   display: block;
-  width: 220px;
+  width: 150px;
 }
 .top-navigation #page-wrapper {
   margin-left: 0;
@@ -3032,7 +3032,7 @@ video {
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
-    margin: 0 0 0 240px;
+    margin: 0 0 0 150px;
     min-height: 1000px;
   }
 }
@@ -5803,7 +5803,7 @@ body.rtls.body-small.fixed-sidebar.mini-navbar #page-wrapper {
   margin: 0 220px 0 0;
 }
 body.rtls.body-small.fixed-sidebar.mini-navbar .navbar-static-side {
-  width: 220px;
+  width: 150px;
 }
 .body-small.rtls .navbar-fixed-top {
   margin-right: 0px;
@@ -5845,7 +5845,7 @@ body.rtls.top-navigation .footer.fixed {
     display: none;
     z-index: 2001;
     position: fixed;
-    width: 220px;
+    width: 150px;
   }
   .rtls.fixed-sidebar.body-small.mini-navbar .navbar-static-side {
     display: block;
@@ -6309,13 +6309,13 @@ body.skin-3 {
 @media (min-width: 768px) {
   #page-wrapper {
     position: inherit;
-    margin: 0 0 0 220px;
+    margin: 0 0 0 150px;
     min-height: 1200px;
   }
   .navbar-static-side {
     z-index: 2001;
     position: absolute;
-    width: 220px;
+    width: 150px;
   }
   .navbar-top-links .dropdown-messages,
   .navbar-top-links .dropdown-tasks,
@@ -6362,7 +6362,7 @@ body.skin-3 {
     display: none;
     z-index: 2001;
     position: fixed;
-    width: 220px;
+    width: 150px;
   }
   .fixed-sidebar.body-small.mini-navbar .navbar-static-side {
     display: block;

@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<body class="fixed-nav">
 <?php $this->beginBody() ?>
 <?= \lavrentiev\widgets\toastr\NotificationFlash::widget([
     'options' => [
@@ -44,123 +44,41 @@ $this->params['breadcrumbs'][] = $this->title;
 ]) ?>
 <div id="wrapper">
     <div class="row border-bottom">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header" style="padding-left: 40px; padding-right: 40px">
+        <nav class="navbar white-bg navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header" style="padding: 0 10px 0 10px">
                 <h2>
                     AddSub.ru
                 </h2>
             </div>
             <div class="navbar-header">
                 <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-                <form role="search" class="navbar-form-custom" action="search_results.html">
-                    <div class="form-group">
-                        <input type="text" placeholder="<?=Yii::t('app', 'Search for something')?>..." class="form-control" name="top-search" id="top-search">
-                    </div>
-                </form>
             </div>
             <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" href="" data-toggle="dropdown" href="#">
+                        <i class="fa fa-cog" style="font-size: 20px"></i>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope" ng-controller="translateCtrl">
+                        <li><a ng-click="changeLanguage('en')">English</a></li>
+                        <li><a ng-click="changeLanguage('es')">Spanish</a></li>
+                    </ul>
+                </li>
                 <li>
-                    <span class="m-r-sm text-muted welcome-message"><?=Yii::t('app', 'Welcome to YN.RU Admin.')?></span>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-messages">
-                        <li>
-                            <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="">
-                                </a>
-                                <div class="media-body">
-                                    <small class="pull-right">46h ago</small>
-                                    <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                    <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="">
-                                </a>
-                                <div class="media-body ">
-                                    <small class="pull-right text-navy">5h ago</small>
-                                    <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                    <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="dropdown-messages-box">
-                                <a href="profile.html" class="pull-left">
-                                    <img alt="image" class="img-circle" src="">
-                                </a>
-                                <div class="media-body ">
-                                    <small class="pull-right">23h ago</small>
-                                    <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                    <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="text-center link-block">
-                                <a href="mailbox.html">
-                                    <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
-                        <li>
-                            <a href="mailbox.html">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="profile.html">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small">12 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="grid_options.html">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="text-center link-block">
-                                <a href="notifications.html">
-                                    <strong>See All Alerts</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </div>
-                        </li>
-                    </ul>
+                    <? if (Yii::$app->user->isGuest) : ?>
+                        <a href="/login">
+                            <i class="fa fa-user"></i> <?=Yii::t('app', 'Sign in')?>
+                        </a>
+                    <? endif; ?>
                 </li>
                 <li>
                     <? if (!Yii::$app->user->isGuest) : ?>
                         <a href="/logout">
                             <i class="fa fa-sign-out"></i> <?=Yii::t('app', 'Log out')?>
+                        </a>
+                    <? endif; ?>
+                    <? if (Yii::$app->user->isGuest) : ?>
+                        <a href="/login">
+                            <i class="fa fa-sign-in"></i> <?=Yii::t('app', 'Log in')?>
                         </a>
                     <? endif; ?>
                 </li>
@@ -184,14 +102,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 </li>
                 <li>
                     <a href="#" data-action="category">
-                        <i class="fa fa-male"></i>
+                        <i class="fa fa-share-alt"></i>
                         <span class="nav-label"><?=Yii::t('app', 'CATEGORY')?></span>
                     </a>
                 </li>
             </ul>
         </div>
     </nav>
-    <div id="page-wrapper" class="gray-bg">
+    <div id="page-wrapper" class="gray-bg row">
         <div class="row wrapper border-bottom white-bg page-heading">
             <div class="col-lg-10">
                 <?= Breadcrumbs::widget([
@@ -200,17 +118,93 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Alert::widget() ?>
             </div>
             <div class="col-lg-2">
-
             </div>
         </div>
+        <div class="row wrapper wrapper-content animated" style="padding: 15px 10px 0">
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+                <?= $content ?>
+            </div>
+            <div class="col-md-4 col-lg-3 col-xs-12 col-sm-12">
+                <div class="ibox" style="margin: 0 0;">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">Today</span>
+                        <h5><?=Yii::t('app', 'Balance')?></h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">22 285,400</h1>
+                        <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div>
+                        <small>New orders</small>
+                    </div>
+                </div>
+                <div class="ibox" style="margin: 0 0;">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">Today</span>
+                        <h5><?=Yii::t('app', 'Add')?></h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">22 285,400</h1>
+                        <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div>
+                        <small>New orders</small>
+                    </div>
+                </div>
+                <div class="ibox" style="margin: 0 0 10px 0;">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">Today</span>
+                        <h5><?=Yii::t('app', 'Sub')?></h5>
+                    </div>
+                    <div class="ibox-content">
+                        <h1 class="no-margins">22 285,400</h1>
+                        <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div>
+                        <small>New orders</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="product_name">Project Name</label>
+                                    <input type="text" id="product_name" name="product_name" value="" placeholder="Project Name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label class="control-label" for="price">Name</label>
+                                    <input type="text" id="price" name="price" value="" placeholder="Name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="form-group">
+                                    <label class="control-label" for="quantity">Company</label>
+                                    <input type="text" id="quantity" name="quantity" value="" placeholder="Company" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="control-label" for="status">Status</label>
+                                    <select name="status" id="status" class="form-control">
+                                        <option value="1" selected="">Completed</option>
+                                        <option value="0">Pending</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="wrapper wrapper-content animated fadeInRight">
-<!--            --><?//= $content ?>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
-
         <div class="footer" >
             <div>
-                Your Natural &copy; 2017
+                AddSub.ru &copy; 2017
             </div>
         </div>
 
