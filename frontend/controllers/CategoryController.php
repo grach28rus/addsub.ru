@@ -5,7 +5,7 @@ namespace frontend\controllers;
 use Yii;
 use common\models\Category;
 use frontend\models\CategorySearch;
-use yii\web\Controller;
+use frontend\components\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -30,33 +30,6 @@ class CategoryController extends Controller
     }
 
     /**
-     * Lists all Category models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new CategorySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single Category model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
-    /**
      * Creates a new Category model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -64,14 +37,23 @@ class CategoryController extends Controller
     public function actionCreate()
     {
         $model = new Category();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
+        $this->addMessage = true;
+        $this->success = true;
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                $this->messages = Yii::t('app', 'Category has been added') . '!';
+            } else {
+                $this->success = false;
+                $this->messages = Yii::t('app', 'Category has not been added') . '!';
+            }
         }
+        $categories = Category::findAll(['status' => 'active']);
+        $dataForTemplate = [
+            'model'        => $model,
+            'categories' => $categories,
+        ];
+
+        return $this->generateResponse('create', $dataForTemplate);
     }
 
     /**
@@ -101,9 +83,16 @@ class CategoryController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->addMessage = true;
+        if ($this->findModel($id)->setStatus('delete')) {
+            $this->success = true;
+            $this->messages = Yii::t('app', 'Category has been delete') . '!';
+        } else {
+            $this->success = false;
+            $this->messages = Yii::t('app', 'Category has not been delete') . '!';
+        }
 
-        return $this->redirect(['index']);
+        return $this->generateResponse();
     }
 
     /**

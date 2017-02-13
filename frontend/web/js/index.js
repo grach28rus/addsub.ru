@@ -1,5 +1,6 @@
 $(document).ready(function () {
-    $(document).on('click', '#actionForm', actionForm);
+    $(document).on('click', '#submit-form', submitForm);
+    $(document).on('click', 'a.action-link', actionLink);
     $(document).on('click', '#action-delete', actionDelete);
     $(document).on('click', '#log-out', actionLogout);
 });
@@ -12,25 +13,32 @@ function actionLogout(e) {
 
 function actionLink(e) {
     e.preventDefault();
-    var url = $(this).data('href');
+    var url = $(this).attr('href');
     $.post(url, function (data) {
         data = JSON.parse(data);
         if (data.success) {
+            $('#content-data').html(data.actionTemplate);
+        } else {
+            toastr.error(data.messages);
+        }
+    });
+}
+
+function submitForm(e) {
+    e.preventDefault();
+    var form = $(this).parents('form');
+    var formAction = form.attr('action');
+    var formId = form.attr('id');
+    var formData = getMapAusForm(formId, true);
+    $.post(formAction, formData, function (data) {
+        data = JSON.parse(data);
+        if (data.success) {
+            $('#content-data').html(data.actionTemplate);
             toastr.success(data.messages);
         } else {
             toastr.error(data.messages);
         }
-    })
-}
-
-function actionForm() {
-    var form = $('#' + $(this).data('form_id'));
-    var formUrl = $(this).data('url');
-    var operation = $(this).data('operation');
-    form.attr('action', formUrl);
-    if ( form.attr('action') == formUrl) {
-        form.submit();
-    }
+    });
 }
 
 function actionDelete() {
@@ -39,6 +47,7 @@ function actionDelete() {
     var url = '/' + button.data('controller') + '/delete?id=' + id;
     var hiddenElement = $(this).parents('tr');
     $.post(url, {id: id}, function (data) {
+        console.log('dfv', data);
         data = JSON.parse(data);
         if (data.success) {
             hiddenElement.hide("slow");

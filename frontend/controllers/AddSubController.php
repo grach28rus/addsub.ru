@@ -4,10 +4,12 @@ namespace frontend\controllers;
 
 use Yii;
 use common\models\AddSub;
+use common\models\Category;
 use frontend\models\AddSubSearch;
-use yii\web\Controller;
+use frontend\components\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\ArrayHelper;
 
 /**
  * AddSubController implements the CRUD actions for AddSub model.
@@ -24,36 +26,10 @@ class AddSubController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'create' => ['GET', 'POST'],
                 ],
             ],
         ];
-    }
-
-    /**
-     * Lists all AddSub models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        $searchModel = new AddSubSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single AddSub model.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
     }
 
     /**
@@ -61,17 +37,28 @@ class AddSubController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($type)
     {
         $model = new AddSub();
+        $categories = Category::findAll(['user_id' => Yii::$app->user->id, 'status' => 'active']);
+        $categories = ArrayHelper::map($categories, 'id', 'name');
+        $this->addMessage = true;
+        $this->success = true;
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->save()) {
+                $this->messages = Yii::t('app', 'Statistics has been changed') . '!';
+            } else {
+                $this->success = false;
+                $this->messages = Yii::t('app', 'Statistics has not been changed') . '!';
+            }
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
         }
+        $dataForTemplate = [
+            'model' => $model,
+            'categories' => $categories
+        ];
+
+        return $this->generateResponse('create', $dataForTemplate);
     }
 
     /**

@@ -44,54 +44,52 @@ $this->params['breadcrumbs'][] = $this->title;
     ]
 ]) ?>
 <div id="wrapper">
-    <div class="row border-bottom">
-        <nav class="navbar white-bg navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-            <div class="navbar-header" style="padding: 0 10px 0 10px">
-                <h2>
-                    AddSub.ru
-                </h2>
-            </div>
-            <div class="navbar-header">
-                <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-            </div>
-            <ul class="nav navbar-top-links navbar-right">
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" href="" data-toggle="dropdown" href="#">
-                        <i class="fa fa-cog" style="font-size: 20px"></i>
-                    </a>
-                    <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope">
-                        <li><a data-lang="En">English</a></li>
-                        <li><a data-lang="Ru">Russian</a></li>
-                    </ul>
-                </li>
+    <nav class="navbar white-bg navbar-fixed-top" role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header" style="padding: 0 10px 0 10px">
+            <h2>
+                AddSub.ru
+            </h2>
+        </div>
+        <div class="navbar-header">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+            <li class="dropdown">
+                <a class="dropdown-toggle count-info" href="" data-toggle="dropdown" href="#">
+                    <i class="fa fa-cog" style="font-size: 20px"></i>
+                </a>
+                <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope">
+                    <li><a data-lang="En">English</a></li>
+                    <li><a data-lang="Ru">Russian</a></li>
+                </ul>
+            </li>
 
-                <li>
-                    <? if (!Yii::$app->user->isGuest) : ?>
-                        <a id="log-out">
-                            <i class="fa fa-sign-out"></i><?=Yii::t('app', 'Log out')?>
-                        </a>
-                    <? endif; ?>
-                </li>
-            </ul>
-        </nav>
-    </div>
+            <li>
+                <? if (!Yii::$app->user->isGuest) : ?>
+                    <a id="log-out">
+                        <i class="fa fa-sign-out"></i><?=Yii::t('app', 'Log out')?>
+                    </a>
+                <? endif; ?>
+            </li>
+        </ul>
+    </nav>
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="#" data-action="add">
+                    <a href="/add-sub/create?type='add'" data-action="add" class="action-link">
                         <i class="fa fa-plus"></i>
                         <span class="nav-label"><?=Yii::t('app', 'ADD')?></span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" data-action="sub">
+                    <a href="/add-sub/create?type='sub'" data-action="sub" class="action-link">
                         <i class="fa fa-minus"></i>
                         <span class="nav-label"><?=Yii::t('app', 'SUB')?></span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" data-action="category">
+                    <a href="/category/create" data-action="category" class="action-link">
                         <i class="fa fa-share-alt"></i>
                         <span class="nav-label"><?=Yii::t('app', 'CATEGORY')?></span>
                     </a>
@@ -100,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </nav>
     <div id="page-wrapper" class="gray-bg row">
-        <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="row border-bottom white-bg page-heading">
             <div class="col-lg-10">
                 <?= Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -111,7 +109,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
         <div class="row wrapper wrapper-content animated" style="padding: 15px 10px 0">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+            <div id="content-data" class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
                 <?= $content ?>
             </div>
             <div class="col-md-4 col-lg-3 col-xs-12 col-sm-12">
@@ -197,9 +195,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 AddSub.ru &copy; 2017
             </div>
         </div>
-
-    </div>
 </div>
+    <?
+        $this->registerJsFile(Yii::getAlias('js/dashBoard.js'), ['depends' => AppAsset::className()]);
+    ?>
 <?php $this->endBody() ?>
 </body>
 </html>

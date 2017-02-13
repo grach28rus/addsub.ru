@@ -15,9 +15,11 @@ use yii\db\Expression;
  * @property string $create_at
  * @property string $update_at
  * @property string $status
+ * @property string $user_id
  */
 class Category extends ActiveRecord
 {
+
     /**
      * @inheritdoc
      */
@@ -33,6 +35,11 @@ class Category extends ActiveRecord
     {
         return [
             [['name', 'status'], 'string'],
+            ['status', 'default', 'value' => 'active'],
+            [['add_or_sub'], 'default', 'value' => function ($model, $attribute) {
+                return $attribute == '1' ? true : false;
+            }],
+            ['user_id', 'default', 'value' => \Yii::$app->user->id],
             [['add_or_sub'], 'boolean'],
             [['create_at', 'update_at'], 'safe'],
         ];
@@ -43,8 +50,8 @@ class Category extends ActiveRecord
             [
                 'class' => TimestampBehavior::className(),
                 'attributes' => [
-                    ActiveRecord::EVENT_BEFORE_INSERT => ['created_at', 'updated_at'],
-                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['create_at', 'update_at'],
+                    ActiveRecord::EVENT_BEFORE_UPDATE => ['update_at'],
                 ],
                 'value' => new Expression('NOW()'),
             ],
@@ -65,4 +72,12 @@ class Category extends ActiveRecord
             'status' => 'Status',
         ];
     }
+
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this->save();
+    }
+
 }

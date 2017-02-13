@@ -13,4 +13,11 @@ return [
     'Please fill out the following fields to login:' => 'Пожалуйста, заполните следующие поля, для входа:',
     'Welcome' => 'Добро пожаловать',
     'Incorrect username or password' => 'Неверный логин или пароль',
+    'Statistics has been changed' => 'Статистика была изменена',
+    'Statistics has not been changed' => 'Статистика не была изменена',
+    'Category has been added' => 'Категория была добавленна',
+    'Category has not been added' => 'Категория не была добавленна',
+    'This name has already been taken' => 'Это имя уже было использованно',
+    'Category has been delete' => 'Категория была удалена',
+    'Category has not been delete' => 'Категория не была удалена',
 ];
