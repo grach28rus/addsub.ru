@@ -1,6 +1,7 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\AddSub;
 use Yii;
 
 use frontend\components\Controller;
@@ -67,9 +68,11 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-
+        $addSub = AddSub::findAll(['user_id' => \Yii::$app->user->id, 'status' => 'active']);
         if (!Yii::$app->user->isGuest) {
-            return $this->render('index');
+            return $this->render('index', [
+                'addSub' => $addSub
+            ]);
         } else {
             $modelLogin = new LoginForm();
             $modelSign = new SignupForm();

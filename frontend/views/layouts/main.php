@@ -8,7 +8,6 @@ use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 
-
 AppAsset::register($this);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -55,7 +54,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
-                <a class="dropdown-toggle count-info" href="" data-toggle="dropdown" href="#">
+                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                     <i class="fa fa-cog" style="font-size: 20px"></i>
                 </a>
                 <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope">
@@ -77,13 +76,13 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
                 <li>
-                    <a href="/add-sub/create?type='add'" data-action="add" class="action-link">
+                    <a href="/add-sub/create?type=add" data-action="add" class="action-link">
                         <i class="fa fa-plus"></i>
                         <span class="nav-label"><?=Yii::t('app', 'ADD')?></span>
                     </a>
                 </li>
                 <li>
-                    <a href="/add-sub/create?type='sub'" data-action="sub" class="action-link">
+                    <a href="/add-sub/create?type=sub" data-action="sub" class="action-link">
                         <i class="fa fa-minus"></i>
                         <span class="nav-label"><?=Yii::t('app', 'SUB')?></span>
                     </a>
@@ -98,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </nav>
     <div id="page-wrapper" class="gray-bg row">
-        <div class="row border-bottom white-bg page-heading">
+        <div class="row white-bg page-heading">
             <div class="col-lg-10">
                 <?= Breadcrumbs::widget([
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
@@ -109,86 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
         <div class="row wrapper wrapper-content animated" style="padding: 15px 10px 0">
-            <div id="content-data" class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
-                <?= $content ?>
-            </div>
-            <div class="col-md-4 col-lg-3 col-xs-12 col-sm-12">
-                <div class="ibox" style="margin: 0 0;">
-                    <div class="ibox-title">
-                        <span class="label label-primary pull-right">Today</span>
-                        <h5><?=Yii::t('app', 'Balance')?></h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="no-margins">22 285,400</h1>
-                        <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div>
-                        <small>New orders</small>
-                    </div>
-                </div>
-                <div class="ibox" style="margin: 0 0;">
-                    <div class="ibox-title">
-                        <span class="label label-primary pull-right">Today</span>
-                        <h5><?=Yii::t('app', 'Add')?></h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="no-margins">22 285,400</h1>
-                        <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div>
-                        <small>New orders</small>
-                    </div>
-                </div>
-                <div class="ibox" style="margin: 0 0 10px 0;">
-                    <div class="ibox-title">
-                        <span class="label label-primary pull-right">Today</span>
-                        <h5><?=Yii::t('app', 'Sub')?></h5>
-                    </div>
-                    <div class="ibox-content">
-                        <h1 class="no-margins">22 285,400</h1>
-                        <div class="stat-percent font-bold text-navy">20% <i class="fa fa-level-up"></i></div>
-                        <small>New orders</small>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-12 col-lg-12 col-xs-12 col-sm-12">
-                <div class="ibox">
-                    <div class="ibox-content">
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="control-label" for="product_name">Project Name</label>
-                                    <input type="text" id="product_name" name="product_name" value="" placeholder="Project Name" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label class="control-label" for="price">Name</label>
-                                    <input type="text" id="price" name="price" value="" placeholder="Name" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label class="control-label" for="quantity">Company</label>
-                                    <input type="text" id="quantity" name="quantity" value="" placeholder="Company" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label class="control-label" for="status">Status</label>
-                                    <select name="status" id="status" class="form-control">
-                                        <option value="1" selected="">Completed</option>
-                                        <option value="0">Pending</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="table-responsive">
-                            <table class="table table-striped">
-
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            <?= $content ?>
         </div>
         <div class="footer" >
             <div>
@@ -196,9 +116,6 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
         </div>
 </div>
-    <?
-        $this->registerJsFile(Yii::getAlias('js/dashBoard.js'), ['depends' => AppAsset::className()]);
-    ?>
 <?php $this->endBody() ?>
 </body>
 </html>

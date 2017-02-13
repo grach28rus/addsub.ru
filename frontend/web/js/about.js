@@ -1,6 +1,5 @@
 $(document).ready(function () {
-    $(document).on('click', '#actionForm', actionForm);
-    $(document).on('click', '#action-delete', actionDelete);
+
     var lineData = {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [

@@ -1,37 +1,32 @@
 <?php
+use frontend\assets\AppAsset;
 
 /* @var $this yii\web\View */
+/* @var $addSub common\models\AddSub */
 
 $this->title = 'Dash Board';
+$tableAddSub = $this->render('../site/tableAddSub', [
+    'addSub' => $addSub
+]);
 ?>
-<div class="ibox float-e-margins">
-    <div class="ibox-content">
-        <div>
-                                        <span class="pull-right text-right">
-                                        <small>Average value of sales in the past month in: <strong>United states</strong></small>
-                                            <br>
-                                            All sales: 162,862
-                                        </span>
-            <h1 class="m-b-xs">$ 50,992</h1>
-            <h3 class="font-bold no-margins">
-                Half-year revenue margin
-            </h3>
-            <small>Sales marketing.</small>
-        </div>
 
-        <div>
-            <canvas id="lineChart" height="250" width="819" style="width: 819px; height: 191px;"></canvas>
-        </div>
+<div id="content-data" class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
 
-        <div class="m-t-md">
-            <small class="pull-right">
-                <i class="fa fa-clock-o"> </i>
-                Update on 16.07.2015
-            </small>
-            <small>
-                <strong>Analysis of sales:</strong> The value has been changed over time, and last month reached a level over $50,000.
-            </small>
-        </div>
-
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 empty-padding">
+        <?= $this->render('dashBoard') ?>
     </div>
+    <div class="hidden-xs hidden-sm col-md-12 col-lg-12 empty-padding">
+        <?= $tableAddSub ?>
+    </div>
+
 </div>
+<div class="col-md-4 col-lg-3 col-xs-12 col-sm-12">
+    <?= $this->render('rightDashBoard') ?>
+</div>
+<div class="hidden-md hidden-lg col-xs-12 col-sm-12">
+    <?= $tableAddSub ?>
+</div>
+
+<?
+$this->registerJsFile(Yii::getAlias('js/dashBoard.js'), ['depends' => AppAsset::className()]);
+?>

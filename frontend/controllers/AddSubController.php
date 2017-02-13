@@ -33,14 +33,14 @@ class AddSubController extends Controller
     }
 
     /**
-     * Creates a new AddSub model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * @param $type
+     * @return null|string
      */
     public function actionCreate($type)
     {
         $model = new AddSub();
-        $categories = Category::findAll(['user_id' => Yii::$app->user->id, 'status' => 'active']);
+        $isAdd = $type == 'add' ? 1 : 0;
+        $categories = Category::findAll(['user_id' => Yii::$app->user->id, 'status' => 'active', 'add_or_sub' => $isAdd]);
         $categories = ArrayHelper::map($categories, 'id', 'name');
         $this->addMessage = true;
         $this->success = true;
@@ -53,31 +53,15 @@ class AddSubController extends Controller
             }
 
         }
+        $addSub = AddSub::getFilterList(['user_id' => \Yii::$app->user->id, 'status' => 'active', 'add' => $isAdd]);
         $dataForTemplate = [
-            'model' => $model,
-            'categories' => $categories
+            'model'      => $model,
+            'categories' => $categories,
+            'type'       => $type,
+             'addSub'    => $addSub
         ];
 
         return $this->generateResponse('create', $dataForTemplate);
-    }
-
-    /**
-     * Updates an existing AddSub model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
-            return $this->render('update', [
-                'model' => $model,
-            ]);
-        }
     }
 
     /**
@@ -88,9 +72,16 @@ class AddSubController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $this->addMessage = true;
+        if ($this->findModel($id)->setStatus('delete')) {
+            $this->success = true;
+            $this->messages = Yii::t('app', 'Category has been delete') . '!';
+        } else {
+            $this->success = false;
+            $this->messages = Yii::t('app', 'Category has not been delete') . '!';
+        }
 
-        return $this->redirect(['index']);
+        return $this->generateResponse();
     }
 
     /**
