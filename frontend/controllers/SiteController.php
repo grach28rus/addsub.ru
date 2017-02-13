@@ -25,7 +25,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
+                        'actions' => ['login', 'error', 'index', 'signup'],
                         'allow' => true,
                     ],
                     [
@@ -67,7 +67,17 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+
+        if (!Yii::$app->user->isGuest) {
+            return $this->render('index');
+        } else {
+            $modelLogin = new LoginForm();
+            $modelSign = new SignupForm();
+            return $this->renderAjax('about', [
+                'modelLogin' => $modelLogin,
+                'modelSign'  => $modelSign,
+            ]);
+        }
     }
 
     /**
@@ -77,18 +87,14 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Welcome') . '! ' . $model->username);
         } else {
-            return $this->renderAjax('about', [
-                'model' => $model,
-            ]);
+            Yii::$app->session->setFlash('error', Yii::t('app', 'Incorrect username or password') . '!');
         }
+
+        return $this->goHome();
     }
 
     /**
@@ -113,14 +119,18 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
-                if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
+                Yii::$app->getUser()->login($user);
+            } else {
+                $errorsStr = '';
+                foreach ($model->errors as $attributeName => $errors) {
+                    foreach ($errors as $error) {
+                        $errorsStr = "$error " . $errorsStr;
+                    }
                 }
+                Yii::$app->session->setFlash('error', $errorsStr);
             }
         }
 
-        return $this->render('signup', [
-            'model' => $model,
-        ]);
+        return $this->goHome();
     }
 }

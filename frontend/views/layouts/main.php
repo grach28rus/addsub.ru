@@ -8,6 +8,7 @@ use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use common\widgets\Alert;
 
+
 AppAsset::register($this);
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -58,27 +59,16 @@ $this->params['breadcrumbs'][] = $this->title;
                     <a class="dropdown-toggle count-info" href="" data-toggle="dropdown" href="#">
                         <i class="fa fa-cog" style="font-size: 20px"></i>
                     </a>
-                    <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope" ng-controller="translateCtrl">
-                        <li><a ng-click="changeLanguage('en')">English</a></li>
-                        <li><a ng-click="changeLanguage('es')">Spanish</a></li>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope">
+                        <li><a data-lang="En">English</a></li>
+                        <li><a data-lang="Ru">Russian</a></li>
                     </ul>
                 </li>
-                <li>
-                    <? if (Yii::$app->user->isGuest) : ?>
-                        <a href="/login">
-                            <i class="fa fa-user"></i> <?=Yii::t('app', 'Sign in')?>
-                        </a>
-                    <? endif; ?>
-                </li>
+
                 <li>
                     <? if (!Yii::$app->user->isGuest) : ?>
-                        <a href="/logout">
-                            <i class="fa fa-sign-out"></i> <?=Yii::t('app', 'Log out')?>
-                        </a>
-                    <? endif; ?>
-                    <? if (Yii::$app->user->isGuest) : ?>
-                        <a href="/login">
-                            <i class="fa fa-sign-in"></i> <?=Yii::t('app', 'Log in')?>
+                        <a id="log-out">
+                            <i class="fa fa-sign-out"></i><?=Yii::t('app', 'Log out')?>
                         </a>
                     <? endif; ?>
                 </li>

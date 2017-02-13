@@ -12,7 +12,7 @@ class Controller extends \yii\web\Controller{
 
     public function init()
     {
-        Yii::$app->language = 'RUS';
+        Yii::$app->language = 'En';
         parent::init();
     }
 

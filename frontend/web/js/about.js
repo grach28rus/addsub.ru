@@ -48,16 +48,16 @@ $(document).ready(function () {
     var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
 
 
-    setTimeout(function() {
-        toastr.options = {
-            closeButton: true,
-            progressBar: false,
-            showMethod: 'slideDown',
-            timeOut: 4000
-        };
-        toastr.success('Welcome to Profit Analysis System');
-
-    }, 1300);
+    // setTimeout(function() {
+    //     toastr.options = {
+    //         closeButton: true,
+    //         progressBar: false,
+    //         showMethod: 'slideDown',
+    //         timeOut: 4000
+    //     };
+    //     toastr.success('Welcome to Money Control System');
+    //
+    // }, 1300);
 
 
 

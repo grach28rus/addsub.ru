@@ -1,7 +1,14 @@
 $(document).ready(function () {
     $(document).on('click', '#actionForm', actionForm);
     $(document).on('click', '#action-delete', actionDelete);
+    $(document).on('click', '#log-out', actionLogout);
 });
+
+function actionLogout(e) {
+    e.preventDefault();
+    $.post('/logout', function (data) {
+    })
+}
 
 function actionLink(e) {
     e.preventDefault();

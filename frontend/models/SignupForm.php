@@ -22,7 +22,10 @@ class SignupForm extends Model
         return [
             ['username', 'trim'],
             ['username', 'required'],
-            ['username', 'unique', 'targetClass' => '\common\models\User', 'message' => 'This username has already been taken.'],
+            ['username', 'unique', 'targetClass' => '\common\models\User', 'filter' => function ($query) {
+                    $userName = mb_strtolower($this->username, 'UTF-8');
+                    $query->where(['lower(username)' => $userName]);
+                }, 'message' => 'This username has already been taken.'],
             ['username', 'string', 'min' => 2, 'max' => 255],
 
             ['email', 'trim'],
