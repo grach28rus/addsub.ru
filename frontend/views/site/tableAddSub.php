@@ -7,6 +7,7 @@ $iterator = 1;
 ?>
 
 <div class="ibox-content">
+    <? if (Yii::$app->controller->id == 'site') : ?>
         <div class="row">
             <div class="col-sm-4">
                 <div class="form-group">
@@ -36,7 +37,7 @@ $iterator = 1;
                 </div>
             </div>
         </div>
-
+    <? endif; ?>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead>
@@ -72,6 +73,7 @@ $iterator = 1;
                         <td>
                             <?= substr($addSubItem->create_at, 0, 10)?>
                         </td>
+                        <? if (Yii::$app->controller->id != 'site') : ?>
                         <td style="width: 50px;">
                             <?
                             $iterator ++;
@@ -83,6 +85,7 @@ $iterator = 1;
                                 'data-controller' => Yii::$app->controller->id,
                             ]);?>
                         </td>
+                        <? endif; ?>
                     </tr>
                 <? endforeach; ?>
                 </tbody>

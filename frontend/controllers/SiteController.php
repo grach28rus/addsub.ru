@@ -68,7 +68,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $addSub = AddSub::findAll(['user_id' => \Yii::$app->user->id, 'status' => 'active']);
+        $addSub = AddSub::getFilterList(['user_id' => \Yii::$app->user->id, 'status' => 'active']);
         if (!Yii::$app->user->isGuest) {
             return $this->render('index', [
                 'addSub' => $addSub

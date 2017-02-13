@@ -58,7 +58,7 @@ class AddSubController extends Controller
             'model'      => $model,
             'categories' => $categories,
             'type'       => $type,
-             'addSub'    => $addSub
+            'addSub'     => $addSub
         ];
 
         return $this->generateResponse('create', $dataForTemplate);
