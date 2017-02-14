@@ -66,19 +66,19 @@ $(document).ready(function () {
             value: 300,
             color: "#a3e1d4",
             highlight: "#1ab394",
-            label: "App"
+            label: "salary"
         },
         {
             value: 50,
             color: "#dedede",
             highlight: "#1ab394",
-            label: "Software"
+            label: "products"
         },
         {
             value: 100,
             color: "#b5b8cf",
             highlight: "#1ab394",
-            label: "Laptop"
+            label: "cinema"
         }
     ];
 
@@ -101,19 +101,19 @@ $(document).ready(function () {
             value: 300,
             color: "#a3e1d4",
             highlight: "#1ab394",
-            label: "App"
+            label: "salary"
         },
         {
             value: 140,
             color: "#dedede",
             highlight: "#1ab394",
-            label: "Software"
+            label: "products"
         },
         {
             value: 200,
             color: "#b5b8cf",
             highlight: "#1ab394",
-            label: "Laptop"
+            label: "cinema"
         }
     ];
 

@@ -30,5 +30,5 @@ $tableAddSub = $this->render('../site/tableAddSub', [
 </div>
 
 <?
-$this->registerJsFile(Yii::getAlias('js/dashBoard.js'), ['depends' => AppAsset::className()]);
+$this->registerJsFile(Yii::getAlias('js/index.js'), ['depends' => AppAsset::className()]);
 ?>
