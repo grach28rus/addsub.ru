@@ -3,6 +3,8 @@ $(document).ready(function () {
     $(document).on('click', 'a.action-link', actionLink);
     $(document).on('click', '#action-delete', actionDelete);
     $(document).on('click', '#log-out', actionLogout);
+
+    getStatistics();
 });
 
 function actionLogout(e) {
@@ -14,13 +16,16 @@ function actionLogout(e) {
 function actionLink(e) {
     e.preventDefault();
     var url = $(this).attr('href');
-    $.post(url, function (data) {
-        data = JSON.parse(data);
-        if (data.success) {
-            $('#content-data').html(data.actionTemplate);
-        } else {
-            toastr.error(data.messages);
-        }
+
+    Pace.track(function(){
+        $.post(url, function (data) {
+            data = JSON.parse(data);
+            if (data.success) {
+                $('#content-data').html(data.actionTemplate);
+            } else {
+                toastr.error(data.messages);
+            }
+        });
     });
 }
 
@@ -30,14 +35,16 @@ function submitForm(e) {
     var formAction = form.attr('action');
     var formId = form.attr('id');
     var formData = getMapAusForm(formId, true);
-    $.post(formAction, formData, function (data) {
-        data = JSON.parse(data);
-        if (data.success) {
-            $('#content-data').html(data.actionTemplate);
-            toastr.success(data.messages);
-        } else {
-            toastr.error(data.messages);
-        }
+    Pace.track(function(){
+        $.post(formAction, formData, function (data) {
+            data = JSON.parse(data);
+            if (data.success) {
+                $('#content-data').html(data.actionTemplate);
+                toastr.success(data.messages);
+            } else {
+                toastr.error(data.messages);
+            }
+        });
     });
 }
 
@@ -95,4 +102,55 @@ function getMapAusForm(id, isSetOnly) {
     }
 
     return map;
+}
+
+function getStatistics() {
+    $.post('/site/get-statistics', function (data) {
+        data = JSON.parse(data);
+        var balance = data.add - data.sub;
+        $('#balance').html(balance + 'p.');
+        $('#add').html(data.add + 'p.');
+        $('#sub').html(data.sub + 'p.');
+        var categories = data.category;
+        var doughnutData = [];
+        var i = 0;
+        var colorRed = randomColor({
+            count: 100,
+            hue: 'red'
+        });
+        var colorGreen = randomColor({
+            count: 100,
+            hue: 'green'
+        });
+        var color;
+        for(var category in categories) {
+            var categoryData = categories[category];
+            color = colorRed[i]
+            if (categoryData.add) {
+                color = colorGreen[i]
+            }
+            doughnutData[i] = {
+                value: categoryData.count,
+                color: color,
+                highlight: "#1ab394",
+                label: category
+            };
+            i++;
+        }
+        console.log('mas', color);
+        var doughnutOptions = {
+            segmentShowStroke: true,
+            segmentStrokeColor: "#fff",
+            segmentStrokeWidth: 3,
+            percentageInnerCutout: 45, // This is 0 for Pie charts
+            animationSteps: 100,
+            animationEasing: "easeOutBounce",
+            animateRotate: true,
+            animateScale: false,
+        };
+
+        var ctx = document.getElementById("doughnutChart").getContext("2d");
+        var DoughnutChart = new Chart(ctx).Doughnut(doughnutData, doughnutOptions);
+    });
+
 }

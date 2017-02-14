@@ -47,7 +47,9 @@ $iterator = 1;
                     <th><?= Yii::t('app', 'Count') ?></th>
                     <th><?= Yii::t('app', 'Category') ?></th>
                     <th><?= Yii::t('app', 'Created At') ?></th>
+                    <? if (Yii::$app->controller->id != 'site') : ?>
                     <th></th>
+                    <? endif; ?>
                 </tr>
                 </thead>
                 <tbody>

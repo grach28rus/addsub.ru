@@ -30,7 +30,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'get-statistics'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -69,9 +69,9 @@ class SiteController extends Controller
     public function actionIndex()
     {
         $addSub = AddSub::getFilterList(['user_id' => \Yii::$app->user->id, 'status' => 'active']);
-        if (!Yii::$app->user->isGuest) {
+         if (!Yii::$app->user->isGuest) {
             return $this->render('index', [
-                'addSub' => $addSub
+                'addSub' => $addSub,
             ]);
         } else {
             $modelLogin = new LoginForm();
@@ -135,5 +135,27 @@ class SiteController extends Controller
         }
 
         return $this->goHome();
+    }
+
+    public function actionGetStatistics()
+    {
+        $statistics = AddSub::getStatistics();
+        $sumAdd = '';
+        $sumSub = '';
+        $category = [];
+        foreach ($statistics as $statistic) {
+            $sumAdd = $statistic->sum_add;
+            $sumSub = $statistic->sum_sub;
+            $category[$statistic->category_name] = [
+                'count' => $statistic->count,
+                'add'   => $statistic->add,
+            ];
+        }
+
+        return json_encode([
+            'add'      => $sumAdd,
+            'sub'      => $sumSub,
+            'category' => $category,
+        ]);
     }
 }

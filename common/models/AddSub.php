@@ -25,6 +25,7 @@ use common\traits\DataBaseHelper;
 class AddSub extends ActiveRecord
 {
     use DataBaseHelper;
+
     /**
      * @inheritdoc
      */
@@ -40,6 +41,7 @@ class AddSub extends ActiveRecord
     {
         return [
             [['user_code', 'category', 'status'], 'string'],
+            [['category', 'count', 'add'], 'required'],
             [['add', 'sub'], 'boolean'],
             [['count'], 'default', 'value' => null],
             [['status'], 'default', 'value' => 'active'],
@@ -53,7 +55,8 @@ class AddSub extends ActiveRecord
         ];
     }
 
-    public function behaviors(){
+    public function behaviors()
+    {
         return [
             [
                 'class' => TimestampBehavior::className(),
@@ -98,6 +101,8 @@ class AddSub extends ActiveRecord
             'update_at',
             'category_name',
             'user_id',
+            'sum_add',
+            'sum_sub',
         ];
     }
 
@@ -105,7 +110,7 @@ class AddSub extends ActiveRecord
     {
         $this->status = $status;
 
-        $this->save();
+        return $this->save();
     }
 
     public static function getFilterList($paramFilterArray)
@@ -119,6 +124,43 @@ class AddSub extends ActiveRecord
         ];
         $functionOptions['functionParameters'] = [
             'param_filter_array' => $paramFilterArray,
+        ];
+
+        return self::callFunction($functionOptions);
+    }
+
+    public static function getSumAdd()
+    {
+        $sumAdd = self::find()->select(['SUM(count) as count'])->where([
+            'user_id' => \Yii::$app->user->id,
+            'add' => true,
+            'status' => 'active'
+        ])->groupBy('user_id')->one();
+
+        return $sumAdd->count;
+    }
+
+    public static function getSumSub()
+    {
+        $sumSub = self::find()->select(['SUM(count) as count'])->where([
+            'user_id' => \Yii::$app->user->id,
+            'add' => false,
+            'status' => 'active'
+        ])->groupBy('user_id')->one();
+
+        return $sumSub->count;
+    }
+
+    public static function getStatistics()
+    {
+        $functionOptions = [
+            'scheme' => 'common',
+            'functionName' => 'get_statistics_add_sub',
+            'type' => 'all',
+            'modelClassName' => self::className(),
+        ];
+        $functionOptions['functionParameters'] = [
+            'param_user_id' => \Yii::$app->user->id,
         ];
 
         return self::callFunction($functionOptions);

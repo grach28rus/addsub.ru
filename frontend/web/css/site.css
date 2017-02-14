@@ -135,3 +135,7 @@ a.desc:after {
     color: inherit;
     padding: 15px 20px 20px 20px;
 }
+
+.pace{
+    z-index: 2500;
+}

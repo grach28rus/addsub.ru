@@ -75,10 +75,10 @@ class AddSubController extends Controller
         $this->addMessage = true;
         if ($this->findModel($id)->setStatus('delete')) {
             $this->success = true;
-            $this->messages = Yii::t('app', 'Category has been delete') . '!';
+            $this->messages = Yii::t('app', 'Item has been delete') . '!';
         } else {
             $this->success = false;
-            $this->messages = Yii::t('app', 'Category has not been delete') . '!';
+            $this->messages = Yii::t('app', 'Item has not been delete') . '!';
         }
 
         return $this->generateResponse();
