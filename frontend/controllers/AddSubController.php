@@ -5,11 +5,11 @@ namespace frontend\controllers;
 use Yii;
 use common\models\AddSub;
 use common\models\Category;
-use frontend\models\AddSubSearch;
 use frontend\components\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
+use frontend\models\AddSubSearch;
 
 /**
  * AddSubController implements the CRUD actions for AddSub model.
@@ -51,9 +51,9 @@ class AddSubController extends Controller
                 $this->success = false;
                 $this->messages = Yii::t('app', 'Statistics has not been changed') . '!';
             }
-
         }
-        $addSub = AddSub::getFilterList(['user_id' => \Yii::$app->user->id, 'status' => 'active', 'add' => $isAdd]);
+        $addSubSearch = new AddSubSearch();
+        $addSub = $addSubSearch->search(['add' => $isAdd], '');
         $dataForTemplate = [
             'model'      => $model,
             'categories' => $categories,
@@ -93,7 +93,7 @@ class AddSubController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = AddSub::findOne($id)) !== null) {
+        if (($model = AddSub::findOne(['id' => $id, 'user_id' => Yii::$app->user->id])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

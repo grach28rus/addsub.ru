@@ -40,13 +40,13 @@ class AddSub extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_code', 'category', 'status'], 'string'],
+            [['user_code', 'status'], 'string'],
             [['category', 'count', 'add'], 'required'],
             [['add', 'sub'], 'boolean'],
             [['count'], 'default', 'value' => null],
             [['status'], 'default', 'value' => 'active'],
             [['count'], 'integer'],
-            [['create_at', 'update_at'], 'safe'],
+            [['create_at', 'update_at', 'status'], 'safe'],
             [['add'], 'default', 'value' => function ($model, $attribute) {
                 return $attribute == '1' ? true : false;
             }],

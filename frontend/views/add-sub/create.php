@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model common\models\AddSub */
 /* @var $categories common\models\Category */
 /* @var $type string */
-/* @var $addSub common\models\AddSub */
+/* @var $addSub \yii\data\ActiveDataProvider*/
 
 $this->title = $type == 'add' ? 'Add' : 'Sub';
 ?>
@@ -22,7 +22,8 @@ $this->title = $type == 'add' ? 'Add' : 'Sub';
     ]) ?>
 
 </div>
-
-<?= $this->render('../site/tableAddSub', [
-    'addSub' => $addSub
-])?>
+<div class="ibox-content">
+    <?= $this->render('../site/tableAddSub', [
+        'addSub' => $addSub
+    ])?>
+</div>

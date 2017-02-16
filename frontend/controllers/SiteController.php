@@ -9,7 +9,9 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 use common\models\LoginForm;
 use frontend\models\SignupForm;
-
+use common\models\Category;
+use yii\helpers\ArrayHelper;
+use frontend\models\AddSubSearch;
 
 /**
  * Site controller
@@ -30,7 +32,7 @@ class SiteController extends Controller
                         'allow' => true,
                     ],
                     [
-                        'actions' => ['logout', 'index', 'get-statistics'],
+                        'actions' => ['logout', 'index', 'get-statistics', 'search'],
                         'allow' => true,
                         'roles' => ['@'],
                     ],
@@ -68,11 +70,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $addSub = AddSub::getFilterList(['user_id' => \Yii::$app->user->id, 'status' => 'active']);
-         if (!Yii::$app->user->isGuest) {
-            return $this->render('index', [
-                'addSub' => $addSub,
-            ]);
+        $addSubSearch = new AddSubSearch();
+        $addSub = $addSubSearch->search(null, '');
+        $category = Category::findAll(['user_id' => \Yii::$app->user->id]);
+        $categoryMap = ArrayHelper::map($category, 'id', 'name');
+        if (!Yii::$app->user->isGuest) {
+        return $this->render('index', [
+            'addSub'       => $addSub,
+            'category'     => $categoryMap,
+            'addSubSearch' => $addSubSearch,
+        ]);
         } else {
             $modelLogin = new LoginForm();
             $modelSign = new SignupForm();
@@ -157,5 +164,18 @@ class SiteController extends Controller
             'sub'      => $sumSub,
             'category' => $category,
         ]);
+    }
+
+    public function actionSearch()
+    {
+        $addSubSearch = new AddSubSearch();
+        $this->addMessage = true;
+        $this->success = true;
+        $addSub = $addSubSearch->search(Yii::$app->request->post());
+        $dataForTemplate = [
+            'addSub' => $addSub,
+        ];
+
+        return $this->generateResponse('../site/tableAddSub', $dataForTemplate);
     }
 }

@@ -9,7 +9,10 @@ use common\models\AddSub;
 
 /**
  * AddSubSearch represents the model behind the search form of `common\models\AddSub`.
+ * @property string $create_at_from
+ * @property string $create_at_to
  */
+
 class AddSubSearch extends AddSub
 {
     /**
@@ -19,58 +22,53 @@ class AddSubSearch extends AddSub
     {
         return [
             [['id', 'count'], 'integer'],
-            [['user_code', 'category', 'create_at', 'status', 'uodate_at'], 'safe'],
+            [['user_code', 'category', 'create_at', 'status', 'uodate_at', 'create_at_from', 'create_at_to', 'add'], 'safe'],
             [['add', 'sub'], 'boolean'],
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function scenarios()
+    public function attributes()
     {
-        // bypass scenarios() implementation in the parent class
-        return Model::scenarios();
+        $parentAttributes =  parent::attributes();
+        $attributes = [
+            'create_at_from',
+            'create_at_to',
+        ];
+
+        return array_merge($parentAttributes, $attributes);
     }
 
     /**
-     * Creates data provider instance with search query applied
-     *
-     * @param array $params
-     *
+     * @param null $conditions
+     * @param null $model
      * @return ActiveDataProvider
      */
-    public function search($params)
+    public function search($conditions = null, $model = null)
     {
-        $query = AddSub::find();
-
-        // add conditions that should always apply here
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        $this->load($params);
-
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
+        $this->load($conditions, $model);
+        if ($this->validate()) {
+            $paramFilterArray = self::getParamsFilterArray();
+            $paramFilterArray['user_id'] = \Yii::$app->user->id;
+            $paramFilterArray['status'] = 'active';
+        } else {
+            $paramFilterArray = [
+                'user_id' => \Yii::$app->user->id,
+                'status'  => 'active'
+            ];
         }
-
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'add' => $this->add,
-            'sub' => $this->sub,
-            'count' => $this->count,
-            'create_at' => $this->create_at,
-            'uodate_at' => $this->uodate_at,
+        $functionOptions = [
+            'scheme' => 'common',
+            'functionName' => 'add_sub_filter_list',
+            'type' => 'all',
+            'modelClassName' => self::className(),
+        ];
+        $functionOptions['functionParameters'] = [
+            'param_filter_array' => $paramFilterArray,
+        ];
+        $functionSql = self::getActiveQuery($functionOptions);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $functionSql,
         ]);
-
-        $query->andFilterWhere(['ilike', 'user_code', $this->user_code])
-            ->andFilterWhere(['ilike', 'category', $this->category])
-            ->andFilterWhere(['ilike', 'status', $this->status]);
 
         return $dataProvider;
     }

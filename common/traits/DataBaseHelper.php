@@ -140,12 +140,12 @@ trait DataBaseHelper
         return $models::findBySql($sql);
     }
 
-    public static function getParamsFilterArray()
+    public function getParamsFilterArray()
     {
         $attributes = self::getAttributes();
         $paramsFilterArray = [];
         foreach ($attributes as $key => $value) {
-            if ($value) {
+            if ($value !== null) {
                 $paramsFilterArray[$key] = $value;
             }
         }
