@@ -1,10 +1,8 @@
 <?php
 return [
-    'If you mindlessly spend money ... 
-     If you can not save ... 
-     Or just want to keep track of money in detail ...' => 'Если вы бездумно тратите деньги... 
-                 Если не можете накопить... 
-                 Или просто хотите четально вести учёт денег...',
+    'If you mindlessly spend money' => 'Если вы бездумно тратите деньги',
+    'If you can not save' => 'Если не можете накопить',
+    'Or just want to keep track of money in detail' => 'Или просто хотите детально вести учёт денег',
     'AddSub - money control system!' => 'AddSub - система контроля денег!',
     'Then, this system is for you!' => 'Тогда эта система для тебя!',
     'You trying to dumb to save money.' => 'Ты пытаешься немого накопить денег.',
@@ -20,4 +18,13 @@ return [
     'This name has already been taken' => 'Это имя уже было использованно',
     'Category has been delete' => 'Категория была удалена',
     'Category has not been delete' => 'Категория не была удалена',
+    'Operation manual' => 'Руководство по эксплуатации',
+    'Registration' => 'Регистрация',
+    'Using' => 'Использование',
+    'Sign up' => 'Регистрация',
+    'Sign in' => 'Вход',
+    'Language has been changed' => 'Язык был изменён',
+    'English' => 'Инглиш',
+    'Russian' => 'Русский',
+    'This page not found' => 'Такая страница не существует',
 ];

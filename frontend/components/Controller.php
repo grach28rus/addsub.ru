@@ -12,7 +12,8 @@ class Controller extends \yii\web\Controller{
 
     public function init()
     {
-        Yii::$app->language = 'En';
+        $language = Yii::$app->session->get('lang');
+        Yii::$app->language = $language ? $language : 'En';
         parent::init();
     }
 

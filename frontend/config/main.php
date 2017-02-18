@@ -37,7 +37,7 @@ return [
             ],
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'site/fault',
         ],
 
         'urlManager' => [
@@ -45,7 +45,8 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '<controller:(' . implode('|', $appControllers) . ')>/<action>' => '<controller>/<action>',
-                'logout' => 'site/logout'
+                'logout' => 'site/logout',
+                '/' => 'site/index',
             ],
         ],
         'i18n' => [

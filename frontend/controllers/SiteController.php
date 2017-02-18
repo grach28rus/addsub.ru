@@ -28,7 +28,7 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error', 'index', 'signup'],
+                        'actions' => ['login', 'error', 'index', 'signup', 'set-language', 'fault'],
                         'allow' => true,
                     ],
                     [
@@ -70,16 +70,16 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        $addSubSearch = new AddSubSearch();
-        $addSub = $addSubSearch->search(null, '');
-        $category = Category::findAll(['user_id' => \Yii::$app->user->id]);
-        $categoryMap = ArrayHelper::map($category, 'id', 'name');
         if (!Yii::$app->user->isGuest) {
-        return $this->render('index', [
-            'addSub'       => $addSub,
-            'category'     => $categoryMap,
-            'addSubSearch' => $addSubSearch,
-        ]);
+            $addSubSearch = new AddSubSearch();
+            $addSub = $addSubSearch->search(null, '');
+            $category = Category::findAll(['user_id' => \Yii::$app->user->id]);
+            $categoryMap = ArrayHelper::map($category, 'id', 'name');
+            return $this->render('index', [
+                'addSub'       => $addSub,
+                'category'     => $categoryMap,
+                'addSubSearch' => $addSubSearch,
+            ]);
         } else {
             $modelLogin = new LoginForm();
             $modelSign = new SignupForm();
@@ -144,6 +144,14 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    public function actionFault()
+    {
+        $exception = Yii::$app->errorHandler->exception;
+        Yii::$app->session->setFlash('error', $exception->getMessage() . '!');
+
+        return $this->goHome();
+    }
+
     public function actionGetStatistics()
     {
         $statistics = AddSub::getStatistics();
@@ -177,5 +185,13 @@ class SiteController extends Controller
         ];
 
         return $this->generateResponse('../site/tableAddSub', $dataForTemplate);
+    }
+
+    public function actionSetLanguage($lang)
+    {
+        Yii::$app->session->set('lang', $lang);
+        Yii::$app->session->setFlash('success', Yii::t('app', 'Language has been changed'));
+
+        return $this->goHome();
     }
 }

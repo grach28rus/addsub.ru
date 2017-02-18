@@ -56,13 +56,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     <i class="fa fa-cog" style="font-size: 20px"></i>
                 </a>
                 <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope">
-                    <li><a data-lang="En">English</a></li>
-                    <li><a data-lang="Ru">Russian</a></li>
+                    <li><a class="change-language" data-lang="En"><?= Yii::t('app', 'English')?></a></li>
+                    <li><a class="change-language" data-lang="RUS"><?= Yii::t('app', 'Russian')?></a></li>
                 </ul>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user"></i> <?=Yii::t('app', 'Sign in')?>
+                    <i class="fa fa-user"></i> <?=Yii::t('app', 'Sign up')?>
                 </a>
                 <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope" style="width: 400px">
                     <div class="container">
@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </li>
             <li>
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user"></i> <?=Yii::t('app', 'Log in')?>
+                    <i class="fa fa-user"></i> <?=Yii::t('app', 'Sign in')?>
                 </a>
                 <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope" style="width: 400px">
                     <div class="container">
@@ -82,8 +82,8 @@ $this->params['breadcrumbs'][] = $this->title;
             </li>
         </ul>
     </nav>
-    <div class="wrapper-content animated content row" style="padding: 10px 10px">
-        <div class="col-md-4 col-lg-3 hidden-xs hidden-sm">
+    <div class="wrapper-content animated content" style="padding: 10px 10px">
+        <div class="col-md-4 col-lg-3 hidden-xs hidden-sm" style="padding: 0 10px 0 0"">
             <div class="ibox" style="margin: 0 0;">
                 <div class="ibox-title">
                     <h5><?=Yii::t('app', 'Graphics')?></h5>
@@ -110,16 +110,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
+        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 empty-padding">
             <div class="ibox-content">
                 <h2>
                     <?= Yii::t('app', 'AddSub - money control system!') ?>
                 </h2>
                 <div>
-                    <?= Yii::t('app', 'If you mindlessly spend money ... 
-                            If you can not save ... 
-                            Or just want to keep track of money in detail ...
-                        ') ?>
+                    <?= Yii::t('app', 'If you mindlessly spend money') . '... ' .
+                        Yii::t('app', 'If you can not save') . '... ' .
+                        Yii::t('app', 'Or just want to keep track of money in detail') . '... ';
+                        ?>
                 </div>
                 <h4>
                     <?= Yii::t('app', 'Then, this system is for you!') ?>

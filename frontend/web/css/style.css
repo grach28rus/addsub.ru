@@ -2883,7 +2883,7 @@ body {
   background-color: #7d7d7d;
   font-size: 13px;
   color: #676a6c;
-  overflow-x: hidden;
+  /*overflow-x: hidden;*/
 }
 html,
 body {
@@ -6420,4 +6420,7 @@ a > h4{
 .img-table{
   width: 120px;
   height: 150px;
+}
+.navbar-right{
+  margin-right: 0;
 }

@@ -3,6 +3,7 @@ $(document).ready(function () {
     $(document).on('click', 'a.action-link', actionLink);
     $(document).on('click', '#action-delete', actionDelete);
     $(document).on('click', '#log-out', actionLogout);
+    $(document).on('click', 'a.change-language', actionChangeLanguage);
     $(document).on('change', '.change-filter', actionSearch);
 
     getStatistics();
@@ -172,3 +173,8 @@ function getStatistics() {
 
 }
 
+function actionChangeLanguage(e) {
+    e.preventDefault();
+    var language = $(this).data('lang');
+    $.get('/site/set-language', {lang: language});
+}

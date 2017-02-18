@@ -58,8 +58,8 @@ $this->params['breadcrumbs'][] = $this->title;
                     <i class="fa fa-cog" style="font-size: 20px"></i>
                 </a>
                 <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope">
-                    <li><a data-lang="En">English</a></li>
-                    <li><a data-lang="Ru">Russian</a></li>
+                    <li><a class="change-language" data-lang="En"><?= Yii::t('app', 'English')?></a></li>
+                    <li><a class="change-language" data-lang="RUS"><?= Yii::t('app', 'Russian')?></a></li>
                 </ul>
             </li>
 

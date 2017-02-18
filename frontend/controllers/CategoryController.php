@@ -47,7 +47,7 @@ class CategoryController extends Controller
                 $this->messages = Yii::t('app', 'Category has not been added') . '!';
             }
         }
-        $categories = Category::findAll(['status' => 'active']);
+        $categories = Category::findAll(['status' => 'active', 'user_id' => \Yii::$app->user->id]);
         $dataForTemplate = [
             'model'        => $model,
             'categories' => $categories,

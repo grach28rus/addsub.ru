@@ -20,8 +20,6 @@ $iterator = 1;
 ?>
 <div class="row">
     <div id="content-data" class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
-
-
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 empty-padding">
             <?= $this->render('dashBoard') ?>
         </div>
