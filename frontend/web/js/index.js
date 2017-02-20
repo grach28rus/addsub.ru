@@ -33,7 +33,7 @@ function actionLink(e) {
 
 function submitForm(e) {
     e.preventDefault();
-    var form = $(this).parents('form');
+    var form = $('#create-add-or-sub');
     var formAction = form.attr('action');
     var formId = form.attr('id');
     var formData = getMapAusForm(formId, true);

@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </h2>
         </div>
         <ul class="nav navbar-top-links navbar-right">
-            <li class="dropdown">
+            <li class="">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                     <i class="fa fa-cog" style="font-size: 20px"></i>
                 </a>
@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <li><a class="change-language" data-lang="RUS"><?= Yii::t('app', 'Russian')?></a></li>
                 </ul>
             </li>
-            <li class="dropdown">
+            <li class="">
                 <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
                     <i class="fa fa-user"></i> <?=Yii::t('app', 'Sign up')?>
                 </a>

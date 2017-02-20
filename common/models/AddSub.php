@@ -6,6 +6,7 @@ use yii\behaviors\TimestampBehavior;
 use \yii\db\ActiveRecord;
 use yii\db\Expression;
 use common\traits\DataBaseHelper;
+use Yii;
 
 /**
  * This is the model class for table "common.add_sub".
@@ -21,6 +22,7 @@ use common\traits\DataBaseHelper;
  * @property string $update_at
  * @property string $category_name
  * @property string $user_id
+ * @property string $comment
  */
 class AddSub extends ActiveRecord
 {
@@ -40,7 +42,7 @@ class AddSub extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_code', 'status'], 'string'],
+            [['user_code', 'status', 'comment'], 'string'],
             [['category', 'count', 'add'], 'required'],
             [['add', 'sub'], 'boolean'],
             [['count'], 'default', 'value' => null],
@@ -75,15 +77,16 @@ class AddSub extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'user_code' => 'User Code',
-            'add' => 'Add',
-            'sub' => 'Sub',
-            'count' => 'Count',
-            'category' => 'Category',
-            'create_at' => 'Create At',
-            'status' => 'Status',
-            'update_at' => 'Uodate At',
+            'id' => Yii::t('app', 'ID'),
+            'user_code' => Yii::t('app', 'User Code'),
+            'add' => Yii::t('app', 'Add'),
+            'sub' => Yii::t('app', 'Sub'),
+            'count' => Yii::t('app', 'Count'),
+            'category' => Yii::t('app', 'Category'),
+            'create_at' => Yii::t('app', 'Create At'),
+            'status' => Yii::t('app', 'Status'),
+            'update_at' => Yii::t('app', 'Update At'),
+            'comment' => Yii::t('app', 'Comment'),
         ];
     }
 
@@ -103,6 +106,7 @@ class AddSub extends ActiveRecord
             'user_id',
             'sum_add',
             'sum_sub',
+            'comment',
         ];
     }
 

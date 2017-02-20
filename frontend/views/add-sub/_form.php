@@ -15,10 +15,8 @@ $dataType = $type == 'add' ? ['1' => 'Add'] : ['0' => 'Sub'];
 $btnType = $type == 'add' ? 'btn-primary' : 'btn-danger';
 $btnValue = $type == 'add' ? 'Add' : 'Sub';
 ?>
-
+<?php $form = ActiveForm::begin(['id' => 'create-add-or-sub']); ?>
 <div class="row add-sub-form">
-
-    <?php $form = ActiveForm::begin(); ?>
     <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
         <?= $form->field($model, 'add')->widget(Select2::classname(), [
             'data' => $dataType,
@@ -41,13 +39,13 @@ $btnValue = $type == 'add' ? 'Add' : 'Sub';
             ],
         ]); ?>
     </div>
-    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <?= $form->field($model, 'comment')->textInput()->label(false); ?>
+    </div>
+    <?php ActiveForm::end(); ?>
+    <div class="hidden-lg hidden-md col-sm-12 col-xs-12">
         <div class="form-group">
-            <label class="control-label" for="category-add_or_sub">-</label> <br />
             <?= Html::submitButton($btnValue, ['class' => 'btn ' . $btnType, 'id' => 'submit-form']) ?>
         </div>
     </div>
-
-    <?php ActiveForm::end(); ?>
-
 </div>

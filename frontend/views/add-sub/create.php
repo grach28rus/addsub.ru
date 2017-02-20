@@ -10,9 +10,11 @@ use yii\helpers\Html;
 /* @var $addSub \yii\data\ActiveDataProvider*/
 
 $this->title = $type == 'add' ? 'Add' : 'Sub';
+$btnType = $type == 'add' ? 'btn-primary' : 'btn-danger';
+$btnValue = $type == 'add' ? 'Add' : 'Sub';
 ?>
 <div class="ibox-content add-sub-create">
-
+    <?= Html::submitButton($btnValue, ['class' => 'btn pull-right ' . $btnType, 'id' => 'submit-form']) ?>
     <h2><?= Html::encode($this->title) ?></h2>
 
     <?= $this->render('_form', [
