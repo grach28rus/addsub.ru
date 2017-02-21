@@ -86,7 +86,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </ul>
         </div>
         <div class="hidden-md hidden-lg">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-white pull-right animation_select" data-animation="fadeInRight" style="">
+            <a class="navbar-minimalize minimalize-styl-2 btn btn-white pull-right animation_select" data-animation="fadeInDown" style="">
                 <i class="fa fa-bars"></i>
             </a>
             <div class="animation-box-nav animated hidden">
