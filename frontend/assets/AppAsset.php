@@ -24,6 +24,7 @@ class AppAsset extends AssetBundle
         'js/main/pace.min.js',
         'js/chartJs/Chart.min.js',
         'js/colorGenerator.js',
+        'js/common.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

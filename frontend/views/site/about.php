@@ -50,40 +50,42 @@ $this->params['breadcrumbs'][] = $this->title;
                 AddSub.ru
             </h2>
         </div>
-        <ul class="nav navbar-top-links navbar-right">
-            <li class="dropdown">
-                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+        <ul class="nav navbar-top-links navbar-right pull-right">
+            <li>
+                <a class="animation_select" data-animation="fadeInRight" href="#">
                     <i class="fa fa-cog" style="font-size: 20px"></i>
                 </a>
-                <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope">
-                    <li><a class="change-language" data-lang="En"><?= Yii::t('app', 'English')?></a></li>
-                    <li><a class="change-language" data-lang="RUS"><?= Yii::t('app', 'Russian')?></a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user"></i> <?=Yii::t('app', 'Sign up')?>
-                </a>
-                <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope" style="width: 400px">
-                    <div class="container">
-                        <?= $this->render('signup', ['model' => $modelSign])?>
-                    </div>
-                </ul>
+                <div class="animation-box-about animated hidden">
+                    <ul class="dropdown-menu" style="display: block">
+                        <li><a class="change-language" data-lang="En"><?= Yii::t('app', 'English')?></a></li>
+                        <li><a class="change-language" data-lang="RUS"><?= Yii::t('app', 'Russian')?></a></li>
+                    </ul>
+                </div>
             </li>
             <li>
-                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                    <i class="fa fa-user"></i> <?=Yii::t('app', 'Sign in')?>
+                <a href="#" class="animation_select" data-animation="fadeInRight">
+                    <i class="fa fa-user"></i> <?=Yii::t('app', 'Sign up')?>
                 </a>
-                <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope" style="width: 400px">
-                    <div class="container">
+                <div class="animation-box-about animated hidden">
+                    <div class="ibox-content">
+                        <?= $this->render('signup', ['model' => $modelSign])?>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <a class="animation_select" data-animation="fadeInRight" href="#">
+                    <i class="fa fa-sign-out"></i> <?=Yii::t('app', 'Sign in')?>
+                </a>
+                <div class="animation-box-about animated hidden">
+                    <div class="ibox-content">
                         <?= $this->render('login', ['model' => $modelLogin])?>
                     </div>
-                </ul>
+                </div>
             </li>
         </ul>
     </nav>
     <div class="wrapper-content animated content" style="padding: 10px 10px">
-        <div class="col-md-4 col-lg-3 hidden-xs hidden-sm" style="padding: 0 10px 0 0"">
+        <div class="col-md-4 col-lg-3 hidden-xs hidden-sm" style="padding: 0 10px 0 0">
             <div class="ibox" style="margin: 0 0;">
                 <div class="ibox-title">
                     <h5><?=Yii::t('app', 'Graphics')?></h5>

@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    $(document).on('click', 'a.change-language', actionChangeLanguage);
     var lineData = {
         labels: ["January", "February", "March", "April", "May", "June", "July"],
         datasets: [
@@ -135,9 +134,3 @@ $(document).ready(function () {
     var ctx = document.getElementById("polarChart").getContext("2d");
     var Polarchart = new Chart(ctx).PolarArea(polarData, polarOptions);
 });
-
-function actionChangeLanguage(e) {
-    e.preventDefault();
-    var language = $(this).data('lang');
-    $.get('/site/set-language', {lang: language});
-}

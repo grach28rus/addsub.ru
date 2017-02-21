@@ -10,8 +10,8 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Signup';
 
 ?>
-<div class="site-signup">
-    <div class="col-lg-4 col-md-4 col-sm-10 col-xs-10">
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <?php $form = ActiveForm::begin(['id' => 'form-signup', 'action' => '/site/signup']); ?>
             <h2><?= Html::encode($this->title) ?></h2>
 
