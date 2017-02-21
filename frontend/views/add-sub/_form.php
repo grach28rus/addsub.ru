@@ -40,7 +40,7 @@ $btnValue = $type == 'add' ? 'Add' : 'Sub';
         ]); ?>
     </div>
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <?= $form->field($model, 'comment')->textInput()->label(false); ?>
+        <?= $form->field($model, 'comment')->textInput(['placeholder' => Yii::t('app', 'Enter your comment') . '...'])->label(false); ?>
     </div>
     <?php ActiveForm::end(); ?>
     <div class="hidden-lg hidden-md col-sm-12 col-xs-12">

@@ -27,4 +27,5 @@ return [
     'English' => 'Инглиш',
     'Russian' => 'Русский',
     'This page not found' => 'Такая страница не существует',
+    'Enter your comment' => 'Заполните коментарий',
 ];
