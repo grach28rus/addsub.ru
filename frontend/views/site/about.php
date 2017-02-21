@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                     <i class="fa fa-cog" style="font-size: 20px"></i>
                                 </a>
                                 <div class="animation-box-about animated hidden">
-                                    <ul class="dropdown-menu" style="display: block">
+                                    <ul class="dropdown-menu open" style="display: block; position: relative">
                                         <li><a class="change-language" data-lang="En"><?= Yii::t('app', 'English')?></a></li>
                                         <li><a class="change-language" data-lang="RUS"><?= Yii::t('app', 'Russian')?></a></li>
                                     </ul>

@@ -1591,11 +1591,10 @@ table.dataTable thead .sorting:after {
 }
 
 .animation-box-about {
-  position: absolute;
+  position: fixed;
   margin: 0 auto;
   left: auto;
-  right: 0;
-  width: 400%;
+  right: 10px;
   border: medium none;
   border-radius: 3px;
   box-shadow: 0 0 3px rgba(86, 96, 117, 0.7);
@@ -1603,7 +1602,6 @@ table.dataTable thead .sorting:after {
   list-style: none outside none;
   padding: 0;
   text-shadow: none;
-  top: 100%;
   z-index: 1000;
 }
 
@@ -6441,4 +6439,7 @@ a > h4{
 }
 .navbar-right{
   margin-right: 0;
+}
+.element-center{
+ width: 300%;
 }
