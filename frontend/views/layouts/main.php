@@ -44,33 +44,56 @@ $this->params['breadcrumbs'][] = $this->title;
 ]) ?>
 <div id="wrapper">
     <nav class="navbar white-bg navbar-fixed-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header" style="padding: 0 10px 0 10px">
+        <div class="navbar-header " style="padding: 0 10px 0 10px">
             <h2>
                 AddSub.ru
             </h2>
         </div>
-        <div class="navbar-header">
+        <div class="navbar-header ">
             <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
         </div>
-        <ul class="nav navbar-top-links navbar-right">
-            <li class="dropdown">
-                <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                    <i class="fa fa-cog" style="font-size: 20px"></i>
-                </a>
-                <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope">
-                    <li><a class="change-language" data-lang="En"><?= Yii::t('app', 'English')?></a></li>
-                    <li><a class="change-language" data-lang="RUS"><?= Yii::t('app', 'Russian')?></a></li>
-                </ul>
-            </li>
-
-            <li>
-                <? if (!Yii::$app->user->isGuest) : ?>
-                    <a id="log-out">
-                        <i class="fa fa-sign-out"></i><?=Yii::t('app', 'Log out')?>
+        <div class="hidden-xs hidden-sm">
+            <ul class="nav navbar-top-links navbar-right pull-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-cog" style="font-size: 20px"></i>
                     </a>
-                <? endif; ?>
-            </li>
-        </ul>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope">
+                        <li><a class="change-language" data-lang="En"><?= Yii::t('app', 'English')?></a></li>
+                        <li><a class="change-language" data-lang="RUS"><?= Yii::t('app', 'Russian')?></a></li>
+                    </ul>
+                </li>
+
+                <li>
+                    <? if (!Yii::$app->user->isGuest) : ?>
+                        <a id="log-out">
+                            <i class="fa fa-sign-out"></i><?=Yii::t('app', 'Log out')?>
+                        </a>
+                    <? endif; ?>
+                </li>
+            </ul>
+        </div>
+        <div class="hidden-md hidden-lg">
+            <ul class="nav navbar-top-links navbar-right pull-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                        <i class="fa fa-cog" style="font-size: 20px"></i>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs ng-scope">
+                        <li><a class="change-language" data-lang="En"><?= Yii::t('app', 'English')?></a></li>
+                        <li><a class="change-language" data-lang="RUS"><?= Yii::t('app', 'Russian')?></a></li>
+                    </ul>
+                </li>
+
+                <li style="margin: 0 10px 0 0">
+                    <? if (!Yii::$app->user->isGuest) : ?>
+                        <a id="log-out">
+                            <i class="fa fa-sign-out"></i><?=Yii::t('app', 'Log out')?>
+                        </a>
+                    <? endif; ?>
+                </li>
+            </ul>
+        </div>
     </nav>
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="sidebar-collapse">
@@ -110,12 +133,12 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="row wrapper wrapper-content animated" style="padding: 15px 10px 0">
             <?= $content ?>
         </div>
-        <div class="footer" >
-            <div>
+        <footer class="footer">
+            <div class="container">
                 AddSub.ru &copy; 2017
             </div>
-        </div>
-</div>
+        </footer>
+    </div>
 <?php $this->endBody() ?>
 </body>
 </html>

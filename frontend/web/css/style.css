@@ -1589,6 +1589,22 @@ table.dataTable thead .sorting:after {
   margin: 0 auto;
   padding-top: 80px;
 }
+
+.animation-box-about {
+  position: fixed;
+  margin: 0 auto;
+  left: auto;
+  right: 10px;
+  border: medium none;
+  border-radius: 3px;
+  box-shadow: 0 0 3px rgba(86, 96, 117, 0.7);
+  font-size: 12px;
+  list-style: none outside none;
+  padding: 0;
+  text-shadow: none;
+  z-index: 1000;
+}
+
 .animation-text-box {
   position: absolute;
   margin-top: 40px;
@@ -6423,4 +6439,7 @@ a > h4{
 }
 .navbar-right{
   margin-right: 0;
+}
+.element-center{
+ width: 300%;
 }
